@@ -23,6 +23,7 @@ function App() {
           <Route index element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Layout />}>
+            {/* <Route path="/" element={<PrivateRoutes />}> */}
               <Route path="/home" element={<HomePage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<BlogPage />} />
@@ -63,6 +64,7 @@ function App() {
                 <Route path=":activepage" element={<AccountPage />} />
               </Route>
             </Route>
+          {/* </Route> */}
         </Routes>
       </AuthProvider>
     </>

@@ -13,7 +13,7 @@ const CartPage = () => {
         <CartHeader currentpage={currentpage} />
       </div>
       {currentpage === "shoppingcart" && <ShoppingCart />}
-      {currentpage === "checkout" && <CheckOut />}
+      {currentpage === "checkout" && <CheckOut/>}
       <div className="d-flex justify-content-center">
         {currentpage === "ordercomplete" && <OrderComplete />}
       </div>

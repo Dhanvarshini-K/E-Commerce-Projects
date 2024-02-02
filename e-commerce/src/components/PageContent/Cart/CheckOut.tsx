@@ -1,16 +1,18 @@
 import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setAddress } from "../Redux/action";
+import { setAddress, setPaymentMethod } from "../Redux/action";
 import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import { storage } from "../../../appwriteConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import "./CheckOut.scss";
-import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckOut = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -21,28 +23,78 @@ const CheckOut = () => {
     state: "",
     country: "",
     zipCode: "",
+    cardNumber: "",
+    date: "",
+    cvv: "",
   });
+
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    // If the name is 'paymentMethod', directly set the value
+    if (name === "paymentMethod") {
+      setFormData((prevState) => ({
+        ...prevState,
+        paymentMethod: value,
+      }));
+    } else {
+      // For other fields, update the formData state as usual
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setAddress(formData));
+    dispatch(setPaymentMethod(formData.paymentMethod));
+    clearForm(e);
+    showToast("Order placed successfully!");
+    navigate("/cart/ordercomplete");
   };
 
   const bucketId = "projectImages";
   const { getTotalCartAmount, cartItems, shopProduct, applyCoupon } =
     useContext(ShopContext);
-    // const [getCoupon, setGetCoupon] = useState("");
-    // const handleApplyCoupon = () => {
-    //   applyCoupon(getCoupon);
-    // };
+  const [getCoupon, setGetCoupon] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
+
+  const handleApplyCoupon = () => {
+    applyCoupon(getCoupon);
+  };
+
+  const clearForm = (e) => {
+    setFormData({
+      ...formData,
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      email: "",
+      streetAddress: "",
+      city: "",
+      state: "",
+      country: "",
+      zipCode: "",
+      cardNumber: "",
+      date: "",
+      cvv: "",
+    });
+  };
+
+  const showToast = (message) => {
+    setToastMessage(message);
+    toast.success(message); // Display success toast
+  };
 
   return (
     <>
@@ -53,7 +105,10 @@ const CheckOut = () => {
               <span className="h5 fw-bold">Contact Information</span>
               <div className="form-row d-flex gap-2">
                 <div className="form-group col-md-6 required ">
-                  <label htmlFor="firstName" className="control-label fw-bold text-secondary">
+                  <label
+                    htmlFor="firstName"
+                    className="control-label fw-bold text-secondary"
+                  >
                     First Name
                   </label>
                   <input
@@ -68,7 +123,10 @@ const CheckOut = () => {
                   />
                 </div>
                 <div className="form-group col-md-6 required">
-                  <label htmlFor="lastName" className="control-label  fw-bold text-secondary ">
+                  <label
+                    htmlFor="lastName"
+                    className="control-label  fw-bold text-secondary "
+                  >
                     Last Name
                   </label>
                   <input
@@ -84,7 +142,10 @@ const CheckOut = () => {
                 </div>
               </div>
               <div className="form-group required">
-                <label htmlFor="phoneNumber" className=" control-label fw-bold text-secondary">
+                <label
+                  htmlFor="phoneNumber"
+                  className=" control-label fw-bold text-secondary"
+                >
                   Phone Number
                 </label>
                 <input
@@ -99,7 +160,10 @@ const CheckOut = () => {
                 />
               </div>
               <div className="form-group required">
-                <label htmlFor="email" className=" control-label fw-bold text-secondary">
+                <label
+                  htmlFor="email"
+                  className=" control-label fw-bold text-secondary"
+                >
                   Email
                 </label>
                 <input
@@ -135,7 +199,10 @@ const CheckOut = () => {
                 />
               </div>
               <div className="form-group required">
-                <label htmlFor="city" className="control-label fw-bold text-secondary">
+                <label
+                  htmlFor="city"
+                  className="control-label fw-bold text-secondary"
+                >
                   City
                 </label>
                 <input
@@ -150,7 +217,10 @@ const CheckOut = () => {
                 />
               </div>
               <div className="form-group required">
-                <label htmlFor="state" className="control-label fw-bold text-secondary">
+                <label
+                  htmlFor="state"
+                  className="control-label fw-bold text-secondary"
+                >
                   State
                 </label>
                 <input
@@ -165,7 +235,10 @@ const CheckOut = () => {
                 />
               </div>
               <div className="form-group required">
-                <label htmlFor="country" className="control-label fw-bold text-secondary">
+                <label
+                  htmlFor="country"
+                  className="control-label fw-bold text-secondary"
+                >
                   Country
                 </label>
                 <input
@@ -180,7 +253,10 @@ const CheckOut = () => {
                 />
               </div>
               <div className="form-group required">
-                <label htmlFor="zipCode" className="control-label fw-bold text-secondary">
+                <label
+                  htmlFor="zipCode"
+                  className="control-label fw-bold text-secondary"
+                >
                   Zip Code
                 </label>
                 <input
@@ -212,16 +288,29 @@ const CheckOut = () => {
                 <button className="border border-1  border-secondary p-2 bg-transparent">
                   <div className="d-flex justify-content-between">
                     <div className="d-flex gap-2">
-                      <input type="radio" name="card" required />
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="creditcard"
+                        onChange={handleChange}
+                        required
+                      />
 
                       <span>Pay by Card credit</span>
                     </div>
-                    <FontAwesomeIcon icon={faCreditCard}/>
+                    <FontAwesomeIcon icon={faCreditCard} />
                   </div>
                 </button>
                 <button className="border border-1  border-secondary p-2 bg-transparent">
                   <div className="d-flex gap-2">
-                    <input type="radio" name="card" required />
+                    <input
+                      type="radio"
+                      name="card"
+                      name="paymentMethod"
+                      value="paypal"
+                      onChange={handleChange}
+                      required
+                    />
                     <span>Paypal</span>
                   </div>
                 </button>
@@ -232,6 +321,9 @@ const CheckOut = () => {
                   type="text"
                   className="form-control border-dark shadow-none"
                   placeholder="1234 1234 1234"
+                  name="cardNumber"
+                  value={formData.cardNumber}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -243,6 +335,9 @@ const CheckOut = () => {
                   <input
                     type="date"
                     className="form-control border-dark shadow-none"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -252,6 +347,9 @@ const CheckOut = () => {
                     type="text"
                     className="form-control border-dark shadow-none"
                     placeholder="CVV code"
+                    name="cvv"
+                    value={formData.cvv}
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -263,6 +361,7 @@ const CheckOut = () => {
             >
               Place Order
             </button>
+            <ToastContainer />
           </form>
         </div>
         <div className="col order_summary col py-3 border rounded border-dark my-5 d-flex flex-column gap-2">
@@ -334,10 +433,10 @@ export default CheckOut;
 // const CheckOut = () => {
 // const { getTotalCartAmount, cartItems, shopProduct, applyCoupon } =
 //   useContext(ShopContext);
-  // const [getCoupon, setGetCoupon] = useState("");
-  // const handleApplyCoupon = () => {
-  //   applyCoupon(getCoupon);
-  // };
+// const [getCoupon, setGetCoupon] = useState("");
+// const handleApplyCoupon = () => {
+//   applyCoupon(getCoupon);
+// };
 //   const bucketId = "projectImages";
 //   const dispatch = useDispatch();
 //   const [formData, setFormData] = useState({

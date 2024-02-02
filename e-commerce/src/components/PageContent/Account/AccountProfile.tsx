@@ -4,6 +4,9 @@ import "./AccountProfile.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../utils/AuthContext";
 import { useRef, useState } from "react";
+import { storage } from "../../../appwriteConfig";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 interface accountProps {
   activepage: string;
@@ -14,9 +17,9 @@ const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
   const location = useLocation();
   const [isActive, setIsActive] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Account");
-  console.log("activepage:", activepage);
   const inputRef = useRef(null);
   const [image, setImage] = useState("");
+  const BucketId = 'projectImages'
 
   const handleImageClick = () => {
     inputRef.current.click();
@@ -31,16 +34,16 @@ const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
   return (
     <section className="account_profile rounded d-flex align-items-center flex-column p-3 py-5 gap-4 m-2">
       <div className="profile_container d-flex flex-column align-items-center">
-        {/* {image ? (
+        {image ? (
         <img src={URL.createObjectURL(image)} alt="sofia_image" className="img-fluid  rounded-circle update_image " />
 
         ):(
-        // <img src={user_icon} alt="sofia_image" className="img-fluid update_image" />
+        <FontAwesomeIcon icon={faCircleUser} className="img-fluid update_image"/>
 
-        )} */}
+        )}
         <span className="h4 fw-bold">Sofia Hervertz</span>
         <div className="edit_profile" onClick={handleImageClick}>
-        {/* <img src={profile_change} alt="profile_change_icon" /> */}
+        <img src={`${storage.getFilePreview(BucketId,'ProfileChange')}`} alt="profile_change_icon" className="user_image" />
 
        
           <input

@@ -6,18 +6,20 @@
 
 
 import { configureStore } from "@reduxjs/toolkit";
-import addressReducer, { AddressState, priceFilterReducer } from "./reducer";
+import addressReducer, { orderReducer, priceFilterReducer } from "./reducer";
+import { combineReducers } from 'redux';
 
 export const rootReducer = combineReducers({
   PriceFilter : priceFilterReducer,
   address: addressReducer,
+  order : orderReducer
 
 });
 
 const store = configureStore({
   reducer: rootReducer,
+  
 })
-import { combineReducers } from 'redux';
 
 
 export default store;

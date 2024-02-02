@@ -2,8 +2,20 @@
 import React, { useContext, useReducer } from "react";
 import "./Complete.scss";
 import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setDate, setOrderId } from "../Redux/action";
+interface OrderState {
+  orderId: string;
+  paymentMethod: string;
+  currentDate:string;
+}
+
+interface RootState {
+  order: OrderState;
+}
 const CompletePage = () => {
   const { shopProduct, cartItems, removeFromCart,getTotalCartAmount } = useContext(ShopContext);
+  const completeDispatch = useDispatch();
   const getCurrentDate = () => {
     const today = new Date();
     const year = today.getFullYear();
@@ -11,7 +23,15 @@ const CompletePage = () => {
     const day = String(today.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
-
+  const generateOrderId = () => {
+    return "#" + Math.floor(Math.random() * 1000000);
+  };
+  completeDispatch(setOrderId(generateOrderId()));
+  completeDispatch(setDate(getCurrentDate()));
+  
+  const orderId = useSelector((state: RootState) => state.order.orderId);
+  const paymentMethod= useSelector((state: RootState) => state.order.paymentMethod);
+  const currentDate = useSelector((state:RootState)=>state.order.currentDate)
   return (
     <section>
       <div className="d-flex row row-cols-sm-4 row-cols-md-5 pt-4 gap-5">
@@ -61,11 +81,11 @@ const CompletePage = () => {
       <div className="p-3 ">
         <div className="order_details">
           <span className="h5 text-secondary fw-bold">Order Code:</span>
-          <span className="h5 fw-bold">#0123_45678</span>
+          <span className="h5 fw-bold">{orderId}</span>
         </div>
         <div className="order_details">
           <span className="h5 fw-bold text-secondary">Date:</span>
-          <span className="h5 fw-bold">{getCurrentDate()}</span>
+          <span className="h5 fw-bold">{currentDate}</span>
         </div>
         <div className="order_details">
           <span className="h5 fw-bold text-secondary">Total:</span>
@@ -73,7 +93,7 @@ const CompletePage = () => {
         </div>
         <div className="order_details">
           <span className="h5 fw-bold text-secondary">Payment Method:</span>
-          <span className="h5 fw-bold"></span>
+          <span className="h5 fw-bold">{paymentMethod}</span>
         </div>
       </div>
     </section>

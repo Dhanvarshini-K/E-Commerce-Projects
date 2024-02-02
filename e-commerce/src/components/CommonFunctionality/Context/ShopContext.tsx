@@ -493,7 +493,7 @@ const ShopContextProvider = (props: { children: ReactNode }) => {
       setCouponMessage("Coupon applied successfully!");
       console.log(appliedCouponDiscount, couponMessage, couponCode);
     } else if (couponCode === "BALA") {
-      setAppliedCouponDiscount(50); 
+      setAppliedCouponDiscount(10); 
       setCouponMessage("Coupon applied successfully!");
       console.log(appliedCouponDiscount, couponMessage, couponCode);
     } else {
