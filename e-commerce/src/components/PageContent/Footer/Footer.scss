@@ -1,0 +1,30 @@
+@import "../../Scss/main.scss";
+
+.newsletter_container {
+    background-image: url('https://cloud.appwrite.io/v1/storage/buckets/projectImages/files/NewsLetter/view?project=659681cecf0db22a1c3e&mode=admin');
+    background-size: cover;
+    height: 40vh;
+
+    .email {
+
+        input,
+        button {
+            background-color: $light;
+        }
+    }
+}
+
+@media(max-width:570px) {
+    .newsletter_container {
+        .img {
+            display: none;
+
+        }
+
+        .newsletter_content {
+            background-color: $light;
+            height: 40vh;
+        }
+    }
+
+}

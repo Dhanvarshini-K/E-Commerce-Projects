@@ -1,0 +1,30 @@
+
+.product_discount {
+    span {
+        width: 55px;
+    }
+    .wishlist_like{
+        width: 30px;
+    }
+}
+.product_content{
+
+    .review_image {
+        width: 70px;
+    }
+}
+.product_image_container{
+    position: relative;
+}
+.add_to_cart {
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+
+    button {
+        width: 90%;
+    }
+}
+
+
+

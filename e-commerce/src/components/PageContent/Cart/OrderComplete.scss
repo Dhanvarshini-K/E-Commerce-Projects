@@ -1,0 +1,15 @@
+@import "../../Scss/main.scss";
+
+.order_complete{
+    width: fit-content;
+    box-shadow: 2px 2px 2px 3px $grey;
+}
+.order_details{
+    display:flex;
+    justify-content: space-between;
+}
+@media(max-width:405px){
+    .order_complete{
+        width: min-content;
+    }
+}

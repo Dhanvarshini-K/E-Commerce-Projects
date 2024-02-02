@@ -1,0 +1,33 @@
+
+.product_side_images{
+    img{
+      width: 90px;
+    }
+}
+.product_main_image{
+    width: 486px;
+    height: 700px;
+}
+.product_color_variety{
+    img{
+        height: 100px;
+    }
+}
+.star{
+    width: 60px;
+}
+.wishlist_button {
+    button{
+        width: 300px;
+    }
+.heart_icon{
+    width: 20px;
+}
+}
+@media(min-width:768px) and (max-width:992px){
+    .product_side_images{
+        img{
+          width: 60px;
+        }
+    }
+}

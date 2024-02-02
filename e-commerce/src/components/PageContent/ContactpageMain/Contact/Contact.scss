@@ -1,0 +1,30 @@
+@import "../../../Scss/main.scss";
+
+.saleup_image {
+    width: 100%;
+}
+
+.sale_up_link {
+    width: 25%;
+    width: 100px;
+}
+
+.card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+
+    .card {
+        flex: 1 0 auto;
+
+        .h5 {
+            color: $grey;
+        }
+
+        .details {
+            width: 35px;
+        }
+    }
+
+}
+

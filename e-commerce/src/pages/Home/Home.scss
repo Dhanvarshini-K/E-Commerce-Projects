@@ -1,0 +1,19 @@
+@import "../../components/Scss/main.scss";
+
+.product{
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+}
+::-webkit-scrollbar {
+    width: 1px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: $WhiteSmoke;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color:$DarkGrey; 
+    border-radius: 6px;
+}

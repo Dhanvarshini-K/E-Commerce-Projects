@@ -1,0 +1,36 @@
+@import "../../Scss/main.scss";
+
+.shopping_cart_image{
+    width: 130px;
+}
+.quantity_button{
+    width: 100px;
+}
+input[type='radio']{
+    accent-color: black;
+    width: 20px;
+    height: 20px;
+   }
+
+.apply_coupon{
+    width: 380px;
+}
+.coupon_input{
+    outline: none;
+}
+
+@media(max-width:768px){
+
+    .heading{
+        display: none;
+    }
+    .add_data{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .apply_coupon{
+        width: 300px;
+    }
+}

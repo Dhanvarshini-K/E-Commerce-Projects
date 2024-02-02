@@ -1,0 +1,35 @@
+@import "../../Scss/main.scss";
+
+.hamburger_container{
+    height: 800px;
+    .vertical_line{
+        width: 250px;
+    }
+    .ham_button{
+        width: 250px;
+    }
+}
+.advertisement{
+    font-size: 14px;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    color: black !important;
+    font-weight: bold;
+}
+.cart_count{
+    width: 22px;
+    height: 22px;
+}
+.navbar{
+    position: fixed;
+}
+.arrow_right{
+    color:$lightBlue ;
+}
+.user{
+    color: $black;
+}
+
+

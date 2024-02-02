@@ -1,0 +1,28 @@
+@import "../../Scss/main.scss";
+
+.order_summary{
+    width: fit-content;
+}
+.checkout_details{
+    margin: 0 auto;
+    width: 99%;
+}
+.order_summary_image{
+    width: 100px;
+}
+.form-group.required {
+    .control-label:after {
+        content: "*";
+        color: $dark_grey;
+    }
+}
+
+@media(max-width:400px){
+
+    .order_summary_image{
+            width: 70px;
+    }
+    .cart_title{
+        font-size: 15px;
+    }
+}
