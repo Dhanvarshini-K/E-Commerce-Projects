@@ -1,16 +1,7 @@
-// import {
-//   cart_one_dark,
-//   cart_two_light,
-//   cart_three_light,
-// } from "../../../assets/resources/icons";
+
 import { Link } from "react-router-dom";
 import "./CartHeader.scss";
-
-
 const CartHeader = ({ currentpage }) => {
-
-
-
   return (
     <section className="cart_header_main d-flex flex-column gap-3">
       <span className="h1 fw-bold text-center">Cart</span>

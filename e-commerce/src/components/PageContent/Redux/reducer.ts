@@ -18,7 +18,7 @@ export const priceFilterReducer = (state = initialState, action: any) => {
 
 //===================================================
 
-import { AddressActionTypes, Address } from "./action";
+import { AddressActionTypes, Address, AccountActionTypes, CHECKOUT } from "./action";
 
 export interface AddressState {
   address: Address | null;
@@ -122,79 +122,68 @@ export const orderReducer = (
 };
 
 
-//==========================================================
+//=======================================================
 
-interface ImageState {
-  isDarkMode: boolean;
+import { AccountDetails } from "./action";
+
+export interface AccountState {
+  account: AccountDetails | null;
 }
 
-const imageInitialState: ImageState = {
-  isDarkMode: true,
+const accountInitialState: AccountState = {
+  account: null,
 };
 
-export const imageReducer = (state = imageInitialState, action: any) => {
+export const accountReducer = (
+  state = accountInitialState,
+  action: AccountActionTypes
+): AccountState => {
   switch (action.type) {
-    case "TOGGLE_IMAGE":
+    case "ACCOUNT_DETAILS":
       return {
         ...state,
-      isDarkMode: !state.isDarkMode,
+        account: action.payload,
       };
+   
     default:
       return state;
   }
 };
 
 
-//=================================================================================
+//========================================================
 
 
-import { UPDATE_DISPLAY_NAME } from "./action";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface AccountState {
-  displayName: string;
+interface EmailStateType {
+  email?: string;
 }
 
-const displayInitialState: AccountState = {
-  displayName: '',
+const initialEmailData: EmailStateType = {
+  email: "",
 };
 
-export const accountReducer = (state = displayInitialState, action: any) => {
-  switch (action.type) {
-    case UPDATE_DISPLAY_NAME:
-      return {
-        ...state,
-        displayName: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const emailSlice = createSlice({
+  name: "EmailData",
+  initialState: initialEmailData,
+  reducers: {
+    updateEmailData: (state, action: PayloadAction<{ email: string }>) => {
+      return { ...state, ...action.payload };
+    },
+  },
+});
+
+export default emailSlice.reducer;
 
 
-//=====================================================
 
 
-interface ShippingState {
-  shippingMethod: string;
-}
 
-const shippingInitialState: ShippingState = {
-  shippingMethod: "",
-};
 
-export const shippingReducer = (
-  state = shippingInitialState,
-  action: { type: string; payload: any }
-): ShippingState => {
-  switch (action.type) {
 
-    case "SET_SHIPPING_METHOD":
-      return {
-        ...state,
-        shippingMethod: action.payload,
-      };
- 
-    default:
-      return state;
-  }
-};
+
+
+
+
+

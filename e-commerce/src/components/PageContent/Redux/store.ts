@@ -6,7 +6,7 @@
 
 
 import { configureStore } from "@reduxjs/toolkit";
-import  { accountReducer, addressReducer, billingReducer, imageReducer, orderReducer, priceFilterReducer, shippingReducer } from "./reducer";
+import  {accountReducer, addressReducer, billingReducer, orderReducer, priceFilterReducer } from "./reducer";
 import { combineReducers } from 'redux';
 
 export const rootReducer = combineReducers({
@@ -14,10 +14,7 @@ export const rootReducer = combineReducers({
   address: addressReducer,
   billingAddress :billingReducer,
   order : orderReducer,
-  shipping : shippingReducer,
-  toggleImage : imageReducer,
-  AccountReducer:accountReducer
-
+  account:accountReducer,
 });
 
 const store = configureStore({
@@ -27,3 +24,5 @@ const store = configureStore({
 
 
 export default store;
+
+

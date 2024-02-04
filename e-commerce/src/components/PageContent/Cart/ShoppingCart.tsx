@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import "./ShoppingCart.scss";
-import { Link } from "react-router-dom";
 import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
 import ShoppingProduct from "../ShoppingCartDetails/ShoppingProduct";
 import { storage } from "../../../appwriteConfig";
 import ShoppingProductDevice from "../ShoppingCartDetails/ShoppingProductDevice";
+import { Link } from "react-router-dom";
+
 
 const ShoppingCart = () => {
   const { getTotalCartAmount, cartItems, shopProduct, applyCoupon } =
@@ -12,7 +13,6 @@ const ShoppingCart = () => {
   const bucketId = "projectImages";
   const [selectedShippingCost, setSelectedShippingCost] = useState(0);
   const [getCoupon, setGetCoupon] = useState("");
-  
 
   const handleShippingOptionChange = (shippingCost: number) => {
     setSelectedShippingCost(shippingCost);
@@ -136,7 +136,8 @@ const ShoppingCart = () => {
               <button className="bg-dark text-white border-0 rounded p-2 w-100">
                 Checkout
               </button>
-            </Link>
+              </Link>
+            
           </div>
         </div>
       </section>

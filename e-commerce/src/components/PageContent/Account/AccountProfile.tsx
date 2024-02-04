@@ -6,16 +6,21 @@ import { useAuth } from "../../../utils/AuthContext";
 import { useEffect, useRef, useState } from "react";
 import { storage } from "../../../appwriteConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { updateDisplayName } from "../Redux/action";
+import { AccountState } from "../Redux/reducer";
 
 interface accountProps {
   activepage: string;
 }
-
+ interface RootState {
+  account : AccountState;
+ }
 
 const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
+  const {account} = useSelector ((state : RootState) => state.account);
+  const [accountData,setAccountData] = useState<AccountState>(account)
   const { user, logoutUser } = useAuth();
   const location = useLocation();
   const [isActive, setIsActive] = useState(false);
@@ -48,7 +53,6 @@ const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
         <FontAwesomeIcon icon={faCircleUser} className="img-fluid update_image"/>
 
         )}
-        <span className="h4 fw-bold">Sofia Hervertz</span>
         <div className="edit_profile" onClick={handleImageClick}>
         <img src={`${storage.getFilePreview(BucketId,'ProfileChange')}`} alt="profile_change_icon" className="user_image" />
 
@@ -60,14 +64,16 @@ const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
             onChange={handleImageChange}
           />
         </div>
+
       </div>
+        <span className="h4 fw-bold">{account?.displayname}</span>
       <div className="dropdown d-flex gap-2 flex-column d-md-none d-sm-block ">
         <div
           className="dropdown-btn border border-dark rounded d-flex justify-content-between p-1 ps-2"
           onClick={() => setIsActive(!isActive)}
         >
           <span className="h5">{selectedCategory}</span>
-          {/* <img src={down_arrow} alt="down_arrow" /> */}
+          <FontAwesomeIcon  icon={faArrowDown}/>
         </div>
         {isActive && (
           <div className="dropdown-content border border-dark  d-flex flex-column gap-2 rounded p-2">

@@ -1,16 +1,48 @@
 import "../Footer/Footer.scss";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { storage } from "../../../appwriteConfig";
+import { useEffect, useRef } from "react";
+import { databases, storage } from "../../../appwriteConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import { ID } from "appwrite";
+import { ToastContainer, toast } from "react-toastify";
 
+
+interface NewsLetterData {
+  emailInput : string
+}
 const Footer = () => {
   const location = useLocation();
   const bucketId = "projectImages";
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  const emailRef = useRef(null);
+
+  const handleSubmit = async (e: any) =>{
+    e.preventDefault();
+
+    try{
+      const newsLetter : NewsLetterData = {
+        emailInput : emailRef.current.value
+      };
+      const promise = databases.createDocument(
+        '659681feb0c97e65e766',
+        'newsletter',
+        ID.unique(),
+        {
+          email:newsLetter.emailInput
+          
+        }
+        );
+      toast.success('Successfuly Sent NewsLetter');
+      emailRef.current.value = "";
+    }
+    catch(error){
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="newsletter_container mt-3">
@@ -21,12 +53,16 @@ const Footer = () => {
           </p>
           <div className="email border-0 border-bottom border-dark d-flex align-items-center">
             <FontAwesomeIcon icon={faEnvelope}/>
+            <form onSubmit={handleSubmit}>
             <input
               type="email"
               placeholder="Email Address"
               className="form-control border-0 no-outline shadow-none"
+              ref={emailRef}
             />
-            <button className="border-0">Signup</button>
+            </form>
+            <button type="submit" className="border-0" >Submit
+            <ToastContainer/></button>
           </div>
         </div>
       </div>

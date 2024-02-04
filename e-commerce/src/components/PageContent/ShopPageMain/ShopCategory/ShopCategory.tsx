@@ -4,7 +4,6 @@ import "./ShopCategory.scss";
 import { Link, useLocation } from "react-router-dom";
 import {
   setPriceFilter,
-  toggleImageMode,
 } from "../../Redux/action";
 import { databases, storage } from "../../../../appwriteConfig";
 import Item from "../../../CommonFunctionality/ProductItems/ProductItem";
@@ -15,9 +14,6 @@ interface RootState {
   PriceFilter: {
     minPrice: number;
     maxPrice: number;
-  };
-  image: {
-    isDarkMode: boolean;
   };
 }
 const ShopCategory = (props: { category: string }) => {
@@ -34,12 +30,6 @@ const ShopCategory = (props: { category: string }) => {
     shopDispatch(setPriceFilter(min, max));
   };
 
-  const imageDispatch = useDispatch();
-  const isDarkMode = useSelector((state: RootState) => state.image);
-
-  const handleClick = () => {
-    imageDispatch(toggleImageMode());
-  };
 
   const shopReducer = (state: any, action: any) => {
     switch (action.type) {
@@ -525,23 +515,12 @@ const ShopCategory = (props: { category: string }) => {
                       }}
                       className="border-1 d-none d-md-block"
                     >
-                      {/* <img
+                      <img
                         src={`${storage.getFilePreview(BucketId, "FirstGrid")}`}
                         alt="first_page_icon"
-                      /> */}
-
-                      <img
-                        src={
-                          isDarkMode
-                            ? `${storage.getFilePreview(
-                                BucketId,
-                                "FirstLightGrid"
-                              )}`
-                            : `${storage.getFilePreview(BucketId, "FirstGrid")}`
-                        }
-                        alt="firstgrid"
-                        onClick={handleClick}
                       />
+
+             
                     </button>
                     <button
                       onClick={() => {
@@ -551,28 +530,14 @@ const ShopCategory = (props: { category: string }) => {
                       }}
                       className="border-1 d-none d-md-block "
                     >
-                      {/* <img
+                      <img
                         src={`${storage.getFilePreview(
                           BucketId,
                           "SecondGrid"
                         )}`}
                         alt="first_page_icon"
-                      /> */}
-                      <img
-                        src={
-                          isDarkMode
-                            ? `${storage.getFilePreview(
-                                BucketId,
-                                "SecondDarkGrid"
-                              )}`
-                            : `${storage.getFilePreview(
-                                BucketId,
-                                "SecondGrid"
-                              )}`
-                        }
-                        alt="secondgrid"
-                        onClick={handleClick}
                       />
+
                     </button>
                     <button
                       onClick={() => {

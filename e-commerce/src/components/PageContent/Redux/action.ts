@@ -91,27 +91,35 @@ export const setDate = (currentDate:string)=>{
 
 //====================================================================
 
-export const toggleImageMode = () => ({
-  type: "TOGGLE_IMAGE_MODE",
+
+export interface AccountDetails {
+  displayname: string;
+  email: string;
+  oldpassword: string;
+  newpassword: string;
+  firstname:string;
+  lastname:string;
+}
+
+
+
+export const setAccountData = (account: AccountDetails) => ({
+  type: 'ACCOUNT_DETAILS',
+  payload: account,
 });
 
 
-//============================================================
-
-export const UPDATE_DISPLAY_NAME = 'UPDATE_DISPLAY_NAME';
-
-export const updateDisplayName = (displayName: string) => ({
-  type: UPDATE_DISPLAY_NAME,
-  payload: displayName,
-});
+export type AccountActionTypes = ReturnType<typeof setAccountData>;
 
 
 //=============================================================
 
+import { createAction } from "@reduxjs/toolkit";
 
-export const setShippingMethod = (shippingMethod: string) => {
-  return {
-    type: "SET_SHIPPING_METHOD",
-    payload: shippingMethod
-  };
-};
+export const updateEmailData = createAction<{ email: string }>("updateEmailData");
+
+
+//=====================================================================
+
+
+

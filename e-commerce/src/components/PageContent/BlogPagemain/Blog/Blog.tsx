@@ -28,6 +28,11 @@ const BlogMain = () => {
   };
   const [gridView, dispatch] = useReducer(viewReducer, "row-cols-md-3");
 
+
+
+
+
+
   return (
     <>
       <div className="blog_image">
@@ -96,6 +101,8 @@ const BlogMain = () => {
             >
               <img src={`${storage.getFilePreview(BucketId,'FourthGrid')}`} alt="first_page_icon" />
             </button>
+
+
           </div>
         </div>
         <div className="dropdown d-flex gap-2 flex-column d-md-none d-sm-block">

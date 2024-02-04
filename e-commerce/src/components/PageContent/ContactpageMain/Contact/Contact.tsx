@@ -1,5 +1,5 @@
 import "../Contact/Contact.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ID } from "appwrite";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,8 +17,7 @@ interface FormData {
   messageInput: string;
 }
 const Contact = () => {
-  const BucketId ='projectImages'
-
+  const BucketId = "projectImages";
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const messageRef = useRef(null);
@@ -32,45 +31,48 @@ const Contact = () => {
         emailInput: emailRef.current.value,
         messageInput: messageRef.current.value,
       };
-      const promise = databases.createDocument(
-        "659681feb0c97e65e766",
-        "65a685d940dc9e145472",
-        ID.unique(),
-        {
-          FullName: formData.nameInput,
-          Email: formData.emailInput,
-          Message: formData.messageInput,
-        }
-      );
-
-      const serviceId = "service_jlreisr";
-      const templateId = "template_9p6gnwi";
-      const publicKey = "KjxJuBgPkz6D0kFf9";
-      const data = {
-        service_id: serviceId,
-        template_id: templateId,
-        user_id: publicKey,
-        template_params: {
-          from_name: formData.nameInput,
-          from_email: formData.emailInput,
-          to_name: "3legant",
-          message: formData.messageInput,
-        },
-      };
-      const mailSentResponse = await axios.post(
-        "https://api.emailjs.com/api/v1.0/email/send",
-        data
+      if (formData.nameInput && formData.emailInput && formData.messageInput) {
+        const promise = databases.createDocument(
+          "659681feb0c97e65e766",
+          "65a685d940dc9e145472",
+          ID.unique(),
+          {
+            FullName: formData.nameInput,
+            Email: formData.emailInput,
+            Message: formData.messageInput,
+          }
         );
-        console.log("Document created:", promise, '\n', mailSentResponse);
 
-      toast.success("Successfully Sent");
-      nameRef.current.value = "";
-      emailRef.current.value = "";
-      messageRef.current.value = "";
+        const serviceId = "service_jlreisr";
+        const templateId = "template_9p6gnwi";
+        const publicKey = "KjxJuBgPkz6D0kFf9";
+        const data = {
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            from_name: formData.nameInput,
+            from_email: formData.emailInput,
+            to_name: "3legant",
+            message: formData.messageInput,
+          },
+        };
+        const mailSentResponse = await axios.post(
+          "https://api.emailjs.com/api/v1.0/email/send",
+          data
+        );
+        console.log("Document created:", promise, "\n", mailSentResponse);
 
+        toast.success("Successfully Sent");
+        nameRef.current.value = "";
+        emailRef.current.value = "";
+        messageRef.current.value = "";
+      } else {
+        // If any input field is empty, display an error message
+        toast.error("Please fill in all fields before sending the message");
+      }
     } catch (error) {
       console.error("Error creating document:", error);
-    
     }
   };
 
@@ -81,7 +83,7 @@ const Contact = () => {
           <Link to="/home" className="text-decoration-none text-secondary">
             Home
           </Link>
-          <FontAwesomeIcon icon={faChevronRight}/>
+          <FontAwesomeIcon icon={faChevronRight} />
           <a href="#" className="text-decoration-none text-dark">
             <b>Contact</b>
           </a>
@@ -103,23 +105,35 @@ const Contact = () => {
         </div>
       </section>
 
-      <AboutUs/>
+      <AboutUs />
       <section className="container p-4">
-        <span className="h1 d-flex justify-content-center fw-bold">Contact Us</span>
+        <span className="h1 d-flex justify-content-center fw-bold">
+          Contact Us
+        </span>
         <div className=" d-flex justify-content-between gap-3 align-self-center align-items-stretch flex-wrap my-3">
           <div className=" card card-body d-flex align-items-center gap-2 border-0 bg-light">
-            <img src={`${storage.getFilePreview(BucketId,'Address')}`} alt="address_icon" className="details" />
+            <img
+              src={`${storage.getFilePreview(BucketId, "Address")}`}
+              alt="address_icon"
+              className="details"
+            />
             <span className="h5 fw-bold">ADDRESS</span>
             <span className="h6">234 Hai Trieu,Ho Chi Minh City,</span>
             <span className="h6">Viet Nam</span>
           </div>
           <div className="contact_container card card-body d-flex gap-2 align-items-center bg-light border-0">
-            <img src={`${storage.getFilePreview(BucketId,'call')}`} alt="contact" />
+            <img
+              src={`${storage.getFilePreview(BucketId, "call")}`}
+              alt="contact"
+            />
             <span className="h5 fw-bold">CONTACT US</span>
             <span className="h6">+84 234 567 890</span>
           </div>
           <div className="mail_container card card-body d-flex gap-2 align-items-center border-0 bg-light">
-            <img src={`${storage.getFilePreview(BucketId,'mail')}`} alt="email_icon" />
+            <img
+              src={`${storage.getFilePreview(BucketId, "mail")}`}
+              alt="email_icon"
+            />
             <span className="h5 fw-bold">EMAIL</span>
             <span className="h6">hello@3legant.com</span>
           </div>
@@ -174,7 +188,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <CardItem/>
+      <CardItem />
     </>
   );
 };

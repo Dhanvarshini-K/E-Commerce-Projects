@@ -1,6 +1,6 @@
 import "../Header/Header.scss";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
 import { useAuth } from "../../../utils/AuthContext";
 import { storage } from "../../../appwriteConfig";
@@ -11,14 +11,15 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 
 
 
+
 const Header = () => {
-  const { productId } = useParams();
   const [openSearch, setOpenSearch] = useState(false);
   const location = useLocation();
-  const { getTotalCartItems, addToWishList, wishListItems, getTotalWishList } =
+  const { getTotalCartItems,getTotalWishList } =
     useContext(ShopContext);
   const { logoutUser } = useAuth();
   const bucketId = "projectImages";
+
 
   return (
     <>
@@ -73,7 +74,6 @@ const Header = () => {
                 placeholder="Search"
               />
             )}
-
             <button
               onClick={() => setOpenSearch(!openSearch)}
               className="border-0 bg-transparent d-none d-md-block img-fluid"

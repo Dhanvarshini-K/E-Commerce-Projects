@@ -20,7 +20,7 @@ const OrderHistory = () => {
   return (
     <>
       <table className=" d-flex gap-3 flex-column mt-4 flex-wrap">
-        <span className="h4 fw-bold">{orderId}</span>
+        <span className="h4 fw-bold">Order History</span>
         <tr className="d-md-flex justify-content-between border-bottom d-none d-md-block">
           <th className="pb-4">
             <span className="h6 text-secondary fw-bold">Number ID</span>
@@ -35,47 +35,66 @@ const OrderHistory = () => {
             <span className="h6 text-secondary fw-bold">Price</span>
           </th>
         </tr>
-        {orderData.map((order) => {
-          return (
-            <>
-              <tr className="d-flex justify-content-between">
-                <td className="d-none d-md-block">
-                  <span className="h6">{orderId}</span>
-                </td>
-                <td className="d-none d-md-block">
-                  <span className="h6">{currentDate}</span>
-                </td>
-                <td className="d-none d-md-block">
-                  <span className="h6">{order.status}</span>
-                </td>
-                <td className="d-none d-md-block">
-                  <span className="h6">${`${getTotalCartAmount(cartItems,shopProduct,0)}`}</span>
-                </td>
-              </tr>
-              <div className="d-sm-block d-md-none border-bottom px-4">
-              <div className="d-flex justify-content-between">
-                <span className="h6 text-seconday fw-bold">Number ID</span>
-                <span className="h6">{order.number_id}</span>
-              </div>
-              <div className="d-flex justify-content-between">
-                <span className="h6 text-seconday fw-bold">Dates</span>
-                <span className="h6">{order.dates}</span>
-              </div>
-              <div className="d-flex justify-content-between">
-                <span className="h6 text-seconday fw-bold">Status</span>
-                <span className="h6">{order.dates}</span>
-              </div>
-              <div className="d-flex justify-content-between">
-                <span className="h6 text-seconday fw-bold">Price</span>
-                <span className="h6">{order.dates}</span>
-              </div>
-            </div>
-            </>
-          );
-        })}
+
+        <tr className="d-flex justify-content-between">
+        <td className="d-none d-md-block">
+          <span className="h6">{orderId}</span>
+        </td>
+        <td className="d-none d-md-block">
+          <span className="h6">{currentDate}</span>
+        </td>
+        <td className="d-none d-md-block">
+          <span className="h6 fw-bold">Delivered</span>
+        </td>
+        <td className="d-none d-md-block">
+          <span className="h6">${`${getTotalCartAmount(cartItems,shopProduct,0)}`}</span>
+        </td>
+      </tr>
+
       </table>
     </>
   );
 };
 
 export default OrderHistory;
+
+
+
+//        {orderData.map((order) => {
+//   return (
+//     <>
+      // <tr className="d-flex justify-content-between">
+      //   <td className="d-none d-md-block">
+      //     <span className="h6">{orderId}</span>
+      //   </td>
+      //   <td className="d-none d-md-block">
+      //     <span className="h6">{currentDate}</span>
+      //   </td>
+      //   <td className="d-none d-md-block">
+      //     <span className="h6">{order.status}</span>
+      //   </td>
+      //   <td className="d-none d-md-block">
+      //     <span className="h6">${`${getTotalCartAmount(cartItems,shopProduct,0)}`}</span>
+      //   </td>
+      // </tr>
+//       <div className="d-sm-block d-md-none border-bottom px-4">
+//       <div className="d-flex justify-content-between">
+//         <span className="h6 text-seconday fw-bold">Number ID</span>
+//         <span className="h6">{order.number_id}</span>
+//       </div>
+//       <div className="d-flex justify-content-between">
+//         <span className="h6 text-seconday fw-bold">Dates</span>
+//         <span className="h6">{order.dates}</span>
+//       </div>
+//       <div className="d-flex justify-content-between">
+//         <span className="h6 text-seconday fw-bold">Status</span>
+//         <span className="h6">{order.dates}</span>
+//       </div>
+//       <div className="d-flex justify-content-between">
+//         <span className="h6 text-seconday fw-bold">Price</span>
+//         <span className="h6">{order.dates}</span>
+//       </div>
+//     </div>
+//     </>
+//   );
+// })}
