@@ -18,19 +18,17 @@ export const priceFilterReducer = (state = initialState, action: any) => {
 
 //===================================================
 
-import { AddressActionTypes, Address, BillingAddress } from "./action";
+import { AddressActionTypes, Address } from "./action";
 
 export interface AddressState {
   address: Address | null;
-  billingAddress : BillingAddress | null;
 }
 
 const addressInitialState: AddressState = {
   address: null,
-  billingAddress : null,
 };
 
-const addressReducer = (
+export const addressReducer = (
   state = addressInitialState,
   action: AddressActionTypes
 ): AddressState => {
@@ -45,24 +43,46 @@ const addressReducer = (
         ...state,
         address: action.payload,
       };
-      case "SET_BILLING_ADDRESS":
-        return {
-          ...state,
-          billingAddress: action.payload,
-        };
-      case "UPDATE_BILLING_ADDRESS":
-        return {
-          ...state,
-          billingAddress: action.payload,
-        };
     default:
       return state;
   }
 };
 
-export default addressReducer;
 
 //===============================================
+
+
+import { BillingActionTypes, BillingAddress } from "./action";
+
+export interface BillingState {
+  billingAddress : BillingAddress | null;
+}
+
+const billingInitialState: BillingState = {
+  billingAddress : null,
+};
+
+export const billingReducer = (
+  state = billingInitialState,
+  action: BillingActionTypes
+): BillingState => {
+  switch (action.type) {
+    case "SET_BILLING_ADDRESS":
+      return {
+        ...state,
+        billingAddress: action.payload,
+      };
+    case "UPDATE_BILLING_ADDRESS":
+      return {
+        ...state,
+        billingAddress: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+//===================================================
 
 interface OrderState {
   orderId: string;
@@ -96,6 +116,84 @@ export const orderReducer = (
         ...state,
         currentDate: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+
+//==========================================================
+
+interface ImageState {
+  isDarkMode: boolean;
+}
+
+const imageInitialState: ImageState = {
+  isDarkMode: true,
+};
+
+export const imageReducer = (state = imageInitialState, action: any) => {
+  switch (action.type) {
+    case "TOGGLE_IMAGE":
+      return {
+        ...state,
+      isDarkMode: !state.isDarkMode,
+      };
+    default:
+      return state;
+  }
+};
+
+
+//=================================================================================
+
+
+import { UPDATE_DISPLAY_NAME } from "./action";
+
+interface AccountState {
+  displayName: string;
+}
+
+const displayInitialState: AccountState = {
+  displayName: '',
+};
+
+export const accountReducer = (state = displayInitialState, action: any) => {
+  switch (action.type) {
+    case UPDATE_DISPLAY_NAME:
+      return {
+        ...state,
+        displayName: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+
+//=====================================================
+
+
+interface ShippingState {
+  shippingMethod: string;
+}
+
+const shippingInitialState: ShippingState = {
+  shippingMethod: "",
+};
+
+export const shippingReducer = (
+  state = shippingInitialState,
+  action: { type: string; payload: any }
+): ShippingState => {
+  switch (action.type) {
+
+    case "SET_SHIPPING_METHOD":
+      return {
+        ...state,
+        shippingMethod: action.payload,
+      };
+ 
     default:
       return state;
   }

@@ -3,8 +3,8 @@ import ShopCategory from "../../components/PageContent/ShopPageMain/ShopCategory
 const ShopPage = () => {
   return (
     <>
-      <ShopCategory category=""/>
-    </>
+    <ShopCategory category=""/>
+        </>
   );
 };
 

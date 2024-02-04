@@ -28,13 +28,6 @@ const CheckOut = () => {
     cvv: "",
   });
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

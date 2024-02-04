@@ -20,16 +20,6 @@ export interface Address {
   phoneNumber:number;
 }
 
-export interface BillingAddress {
-  streetAddress: string;
-  country: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  firstName:string;
-  lastName:string;
-  phoneNumber:number;
-}
 
 
 export const setAddress = (address: Address) => ({
@@ -44,6 +34,21 @@ export const updateAddress = (updateAddress : Address)=>(
   }
 )
 
+export type AddressActionTypes = ReturnType<typeof setAddress> | ReturnType<typeof updateAddress>;
+
+export interface BillingAddress {
+  streetAddress: string;
+  country: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  firstName:string;
+  lastName:string;
+  phoneNumber:number;
+}
+
+
+
 export const setBillingAddress = (billingAddress: BillingAddress) => ({
   type: 'SET_BILLING_ADDRESS',
   payload: billingAddress,
@@ -51,12 +56,13 @@ export const setBillingAddress = (billingAddress: BillingAddress) => ({
 
 export const updateBillingAddress = (updateBillingAddress : BillingAddress)=>(
   {
-    type:'UPDATE_BILLING_ADDRESS',
+    type:'SET_BILLING_ADDRESS',
     payload:updateBillingAddress
   }
 )
 
-export type AddressActionTypes = ReturnType<typeof setAddress> | ReturnType<typeof updateAddress> | ReturnType<typeof setBillingAddress> | ReturnType<typeof updateBillingAddress>;
+export type BillingActionTypes = ReturnType<typeof setBillingAddress> | ReturnType<typeof updateBillingAddress> 
+
 
 //=========================================
 
@@ -80,3 +86,32 @@ export const setDate = (currentDate:string)=>{
     payload:currentDate
   }
 }
+
+
+
+//====================================================================
+
+export const toggleImageMode = () => ({
+  type: "TOGGLE_IMAGE_MODE",
+});
+
+
+//============================================================
+
+export const UPDATE_DISPLAY_NAME = 'UPDATE_DISPLAY_NAME';
+
+export const updateDisplayName = (displayName: string) => ({
+  type: UPDATE_DISPLAY_NAME,
+  payload: displayName,
+});
+
+
+//=============================================================
+
+
+export const setShippingMethod = (shippingMethod: string) => {
+  return {
+    type: "SET_SHIPPING_METHOD",
+    payload: shippingMethod
+  };
+};

@@ -1,10 +1,10 @@
-import React, { useContext, useReducer, useState } from "react";
-// import { remove, ticket_percent_light } from "../../../assets/resources/icons";
+import React, { useContext, useState } from "react";
 import "./ShoppingCart.scss";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
 import ShoppingProduct from "../ShoppingCartDetails/ShoppingProduct";
 import { storage } from "../../../appwriteConfig";
+import ShoppingProductDevice from "../ShoppingCartDetails/ShoppingProductDevice";
 
 const ShoppingCart = () => {
   const { getTotalCartAmount, cartItems, shopProduct, applyCoupon } =
@@ -12,19 +12,21 @@ const ShoppingCart = () => {
   const bucketId = "projectImages";
   const [selectedShippingCost, setSelectedShippingCost] = useState(0);
   const [getCoupon, setGetCoupon] = useState("");
+  
 
   const handleShippingOptionChange = (shippingCost: number) => {
     setSelectedShippingCost(shippingCost);
   };
   const handleApplyCoupon = () => {
     applyCoupon(getCoupon);
-  };
+  };  
+
   return (
     <>
       <section className=" container mt-5">
-        <div className=" row row-cols-1 row-cols-md-2 border d-flex justify-content-between">
-          <div className="col col-md-8 border ">
-            <table className="d-none d-md-block table">
+        <div className=" row  row-cols-1 row-cols-lg-2  d-flex justify-content-between">
+          <div className="col col-lg-8">
+            <table className="d-none d-lg-block table">
               <thead className="">
                 <tr className="border-bottom border-dark">
                   <th className="h5 fw-bold">Product</th>
@@ -34,6 +36,14 @@ const ShoppingCart = () => {
                 </tr>
               </thead>
               <ShoppingProduct />
+            </table>
+            <table className="d-lg-none table">
+              <thead className="">
+                <tr className="border-bottom border-dark">
+                  <th className="h5 fw-bold">Product</th>
+                </tr>
+              </thead>
+              <ShoppingProductDevice />
             </table>
             <div className="d-flex flex-column gap-2 pt-5 ">
               <span className="h5 fw-bold">Have a Coupon?</span>
@@ -64,7 +74,7 @@ const ShoppingCart = () => {
             </div>
           </div>
 
-          <div className="col col-md-4  cart_summary border border-dark rounded mt-4 py-4 d-flex  gap-3 p-2  flex-column">
+          <div className="col col-lg-4  cart_summary border border-dark rounded mt-4  py-4 d-flex  gap-3 p-2  flex-column">
             <span className="h4 fw-bold">Cart Summary</span>
             <div className="border border-dark d-flex justify-content-between align-items-center p-2">
               <div className="d-flex gap-2 align-items-start">

@@ -3,14 +3,17 @@
 import "./AccountProfile.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../utils/AuthContext";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { storage } from "../../../appwriteConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { updateDisplayName } from "../Redux/action";
 
 interface accountProps {
   activepage: string;
 }
+
 
 const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
   const { user, logoutUser } = useAuth();
@@ -30,6 +33,10 @@ const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
     console.log(file);
     setImage(e.target.files[0]);
   };
+
+
+
+
 
   return (
     <section className="account_profile rounded d-flex align-items-center flex-column p-3 py-5 gap-4 m-2">
