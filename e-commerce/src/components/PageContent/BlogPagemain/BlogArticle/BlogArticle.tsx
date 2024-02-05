@@ -21,6 +21,7 @@ const BlogArticle = ({ view, addArticle }: Props) => {
           "659681feb0c97e65e766",
           "article"
         );
+        console.log('response', response);
         setBlogArticle(response);
       } catch (error) {
         console.error(error);

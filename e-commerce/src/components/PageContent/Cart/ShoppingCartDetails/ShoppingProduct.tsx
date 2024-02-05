@@ -6,6 +6,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const ShoppingProduct = () => {
   const { shopProduct, cartItems, removeFromCart } = useContext(ShopContext);
+  const subTotalArray = [];
   return (
     <>
       {shopProduct.documents.map((cart: any) => {
@@ -26,6 +27,9 @@ const ShoppingProduct = () => {
         }
         const [state, dispatch] = useReducer(reducer, initialState);
         const subtotal = (cart.Actualprice * state.count).toFixed(2);
+        subTotalArray.push(subtotal);
+        console.log(subTotalArray);
+        
 
         if (quantity > 0) {
           return (

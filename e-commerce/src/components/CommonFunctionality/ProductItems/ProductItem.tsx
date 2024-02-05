@@ -15,8 +15,7 @@ const Item = (props: any) => {
 
  
   return (
-    <>
-      <section>
+   
         <div
           className="product_category pb-5 pt-5"
           key={props.id}
@@ -89,8 +88,6 @@ const Item = (props: any) => {
             </div>
           </div>
         </div>
-      </section>
-    </>
   );
 };
 

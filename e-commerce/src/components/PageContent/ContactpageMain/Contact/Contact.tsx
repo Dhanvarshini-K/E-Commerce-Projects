@@ -27,7 +27,7 @@ const Contact = () => {
 
     try {
       const formData: FormData = {
-        nameInput: nameRef.current.value,
+        nameInput: nameRef?.current?.value,
         emailInput: emailRef.current.value,
         messageInput: messageRef.current.value,
       };
