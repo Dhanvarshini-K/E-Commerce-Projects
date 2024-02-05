@@ -1,14 +1,21 @@
-import React, { useContext, useReducer } from "react";
+import  { useContext, useReducer } from "react";
 import { ShopContext } from "../../../CommonFunctionality/Context/ShopContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
+interface CartData {
+  image:string;
+  ProductTitle: string;
+  color:string;
+  Actualprice:string;
+  id:number
+}
 const OrderSummary = () => {
   const { shopProduct, cartItems, removeFromCart } = useContext(ShopContext);
   return (
     <div className="d-flex flex-column gap-5">
       <>
-        {shopProduct.documents.map((cart) => {
+        {shopProduct.documents.map((cart : CartData) => {
           const quantity = cartItems[cart.id];
           const initialState = { count: quantity };
 

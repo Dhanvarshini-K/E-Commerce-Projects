@@ -64,7 +64,7 @@ const ShopCategory = (props: { category: string }) => {
   );
   const [shopProduct, setShopProduct] = useState<any>({ documents: [] });
   const [currentImage, setCurrentImage] = useState("FirstGrid");
-  const handleImageChange = (image) => {
+  const handleImageChange = (image : string) => {
     setCurrentImage(image);
   };
 

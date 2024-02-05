@@ -10,7 +10,7 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { databases } from "../../../../appwriteConfig";
 
-const ProductDisplay = (props) => {
+const ProductDisplay = (props : any) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const infoClick = () => {

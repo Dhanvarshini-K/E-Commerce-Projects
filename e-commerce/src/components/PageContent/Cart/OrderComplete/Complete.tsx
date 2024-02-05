@@ -9,6 +9,10 @@ interface OrderState {
   paymentMethod: string;
   currentDate:string;
 }
+interface Cart {
+  image : string;
+  id:number;
+}
 
 interface RootState {
   order: OrderState;
@@ -35,7 +39,7 @@ const CompletePage = () => {
   return (
     <section>
       <div className="d-flex row row-cols-sm-4 row-cols-md-5 pt-4 gap-5">
-        {shopProduct.documents.map((cart) => {
+        {shopProduct.documents.map((cart :Cart) => {
           const quantity = cartItems[cart.id];
           const initialState = { count: quantity };
 

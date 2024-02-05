@@ -64,7 +64,7 @@ const ShopContextProvider = (props: { children: ReactNode }) => {
 
   
     const [couponCode, setCouponCode] = useState("");
-    const [appliedCouponDiscount, setAppliedCouponDiscount] = useState(0);
+    const [appliedCouponDiscount, setAppliedCouponDiscount] = useState<number>(0);
     const [couponMessage, setCouponMessage] = useState("");
   const [shopProduct, setShopProduct] = useState<any>({ documents: [] });
   
@@ -170,6 +170,7 @@ const ShopContextProvider = (props: { children: ReactNode }) => {
       }
     }
     totalAmount -= appliedCouponDiscount;
+    
     // if(totalAmount>100){
     //    totalAmount -= appliedCouponDiscount;
     // }
@@ -181,6 +182,8 @@ const ShopContextProvider = (props: { children: ReactNode }) => {
     shopProduct,
     cartItems,
     wishListItems,
+    appliedCouponDiscount,
+    couponCode,
     addToCart,
     removeFromCart,
     addToWishList,

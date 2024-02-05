@@ -5,7 +5,8 @@ import ShoppingProduct from "../ShoppingCartDetails/ShoppingProduct";
 import { storage } from "../../../../appwriteConfig";
 import ShoppingProductDevice from "../ShoppingCartDetails/ShoppingProductDevice";
 import { Link } from "react-router-dom";
-
+import { setShippingOption } from "../../Redux/action";
+import { useDispatch } from "react-redux";
 
 const ShoppingCart = () => {
   const { getTotalCartAmount, cartItems, shopProduct, applyCoupon } =
@@ -13,13 +14,20 @@ const ShoppingCart = () => {
   const bucketId = "projectImages";
   const [selectedShippingCost, setSelectedShippingCost] = useState(0);
   const [getCoupon, setGetCoupon] = useState("");
+  const dispatch = useDispatch();
+
+  const handleShipping = (option : string) => {
+    dispatch(setShippingOption(option));
+    console.log(option);
+  };
+  
 
   const handleShippingOptionChange = (shippingCost: number) => {
     setSelectedShippingCost(shippingCost);
   };
   const handleApplyCoupon = () => {
     applyCoupon(getCoupon);
-  };  
+  };
 
   return (
     <>
@@ -80,8 +88,12 @@ const ShoppingCart = () => {
               <div className="d-flex gap-2 align-items-start">
                 <input
                   type="radio"
-                  name="anyone"
-                  onChange={() => handleShippingOptionChange(0)}
+                  name="shippingOption"
+                  value="Free"
+                  onChange={() => {
+                    handleShippingOptionChange(0);
+                    handleShipping("Free");
+                  }}
                 />
                 <label className="h6 fw-bold">Free shipping</label>
               </div>
@@ -91,8 +103,12 @@ const ShoppingCart = () => {
               <div className="d-flex gap-2 align-items-start">
                 <input
                   type="radio"
-                  name="anyone"
-                  onChange={() => handleShippingOptionChange(15.0)}
+                  name="shippingOption"
+                  value="Express"
+                  onChange={() => {
+                    handleShippingOptionChange(15.0);
+                    handleShipping("Express");
+                  }}
                 />
                 <label className="h6 fw-bold">Express shipping</label>
               </div>
@@ -102,8 +118,12 @@ const ShoppingCart = () => {
               <div className="d-flex gap-2 align-items-start">
                 <input
                   type="radio"
-                  name="anyone"
-                  onChange={() => handleShippingOptionChange(21 / 100)}
+                  name="shippingOption"
+                  value="PickUp"
+                  onChange={() => {
+                    handleShippingOptionChange(21 / 100);
+                    handleShipping("Pickup");
+                  }}
                 />
                 <label className="h6 fw-bold">Pick Up</label>
               </div>
@@ -136,8 +156,7 @@ const ShoppingCart = () => {
               <button className="bg-dark text-white border-0 rounded p-2 w-100">
                 Checkout
               </button>
-              </Link>
-            
+            </Link>
           </div>
         </div>
       </section>

@@ -6,6 +6,11 @@ interface Props {
   addArticle: Boolean;
 }
 
+interface Blog {
+  image:string;
+  title :string;
+  date:string;
+}
 const BlogArticle = ({ view, addArticle }: Props) => {
   const [blogArticle, setBlogArticle] = useState<any>({ documents: [] });
 
@@ -29,7 +34,7 @@ const BlogArticle = ({ view, addArticle }: Props) => {
     navigate("/article", { state: [title, image] });
   };
 
-  const renderBlogArticle = blogArticle.documents.map((blogarticle, index) => {
+  const renderBlogArticle = blogArticle.documents.map((blogarticle : Blog, index : null) => {
     return (
       <div
         key={index}

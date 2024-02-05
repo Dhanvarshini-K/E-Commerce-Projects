@@ -27,7 +27,7 @@ const [accountDetails, setAccountDetails] = useState<accountDetails>({
     confirmpassword: "",
   });
 
-  const handleChange = (e) =>{
+  const handleChange = (e : any) =>{
     const {name,value} = e.target;
     setAccountDetails((prevState) =>({
       ...prevState,
@@ -35,7 +35,7 @@ const [accountDetails, setAccountDetails] = useState<accountDetails>({
     }))
   }
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e : any) =>{
     e.preventDefault();
     dispatch(setAccountData(accountDetails))
   }

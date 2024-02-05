@@ -31,7 +31,7 @@ const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
     inputRef.current.click();
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e:any) => {
     const file = e.target.files[0];
     console.log(file);
     setImage(e.target.files[0]);
@@ -67,7 +67,7 @@ const AccountProfile: React.FC<accountProps> = ({ activepage }) => {
         <span className="h4 fw-bold">{account?.displayname}</span>
       <div className="dropdown d-flex gap-2 flex-column d-md-none d-sm-block ">
         <div
-          className="dropdown-btn border border-dark rounded d-flex justify-content-between p-1 ps-2"
+          className="dropdown-btn border border-dark rounded d-flex justify-content-between p-1 ps-2 align-items-center"
           onClick={() => setIsActive(!isActive)}
         >
           <span className="h5">{selectedCategory}</span>

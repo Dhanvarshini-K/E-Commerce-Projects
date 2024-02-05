@@ -2,9 +2,13 @@
 import  { useState, useEffect } from 'react';
 import { databases } from "../../../appwriteConfig";
 import "../ServiceCard/Card.scss";
-
+interface Card {
+  image:string;
+  title:string;
+  description : string;
+}
 const CardItem = () => {
-  const [serviceCard, setServiceCard] = useState({ documents: [] });
+  const [serviceCard, setServiceCard] = useState<any>({ documents: [] });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +24,7 @@ const CardItem = () => {
   }, []); 
 
   
-  const renderCard = serviceCard.documents.map((card, index) => (
+  const renderCard = serviceCard.documents?.map((card:Card, index :number) => (
     <section key={index} className="card card-body bg-light d-flex flex-column align-items-center border-0 py-3 px-2">
       <img src={`../../src/assets/images/Service/${card.image}`} alt="shipping" />
       <span className="h6 fw-bold">{card.title}</span>

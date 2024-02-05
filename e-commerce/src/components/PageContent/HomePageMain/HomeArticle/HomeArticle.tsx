@@ -6,8 +6,15 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { databases } from "../../../../appwriteConfig";
+
+interface Article {
+  image:string;
+  title : string;
+  link : string;
+}
+
 const HomeArticle = () => {
-  const [articleData, setArticleData] = useState({ documents: [] });
+  const [articleData, setArticleData] = useState<any>({ documents: [] });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +40,7 @@ const HomeArticle = () => {
 
   const renderArticle = articleData.documents
     .slice(0, 3)
-    .map((article, index) => (
+    .map((article : Article, index : number) => (
       <section
         key={index}
         className="article container d-flex  flex-column gap-3"

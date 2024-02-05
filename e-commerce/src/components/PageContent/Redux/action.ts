@@ -116,6 +116,13 @@ export type AccountActionTypes = ReturnType<typeof setAccountData>;
 
 
 
+export const setShippingOption = (shippingMethod: string) => {
+  return {
+    type: "SET_SHIPPING_METHOD",
+    payload: shippingMethod
+  };
+};
+
 
 //=====================================================================
 

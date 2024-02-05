@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./CartHeader.scss";
 import { storage } from "../../../../appwriteConfig";
-const CartHeader = ({ currentpage }) => {
+const CartHeader = ({ currentpage } : any) => {
   const BucketId = "projectImages";
   return (
     <section className="cart_header_main d-flex flex-column gap-3">
@@ -33,11 +33,11 @@ const CartHeader = ({ currentpage }) => {
             </>
           )}
           {currentpage === "shoppingcart" ? (
-            <span className="text-decoration-none cart_nav_link h5">
+            <span className="text-decoration-none cart_nav_link h5 fw-bold">
               Shopping Cart
             </span>
           ) : (
-            <a href="#" className="h5 cart_nav_link text-decoration-none">
+            <a href="#" className="h5 cart_nav_link text-decoration-none fw-bold">
               Shopping cart
             </a>
           )}
@@ -72,13 +72,13 @@ const CartHeader = ({ currentpage }) => {
           )}
 
           {currentpage === "checkout" ? (
-            <span className="text-decoration-none text-dark h5 cart_nav_link">
+            <span className="text-decoration-none text-dark h5 cart_nav_link fw-bold">
               Check Out
             </span>
           ) : (
             <Link
               to="#"
-              className="text-decoration-none text-dark h5 cart_nav_link"
+              className="text-decoration-none text-dark h5 cart_nav_link  fw-bold"
             >
               Check Out
             </Link>
@@ -101,14 +101,14 @@ const CartHeader = ({ currentpage }) => {
 
           {currentpage === "ordercomplete" ? (
             <span
-              className="text-decoration-none h5 cart_nav_link"
+              className="text-decoration-none h5 cart_nav_link  fw-bold"
             >
               Order Complete
             </span>
           ) : (
             <Link
               to="#"
-              className="text-decoration-none h5 cart_nav_link"
+              className="text-decoration-none h5 cart_nav_link fw-bold"
             >
               Order complete
             </Link>

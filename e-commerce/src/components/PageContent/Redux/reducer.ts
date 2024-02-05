@@ -18,7 +18,7 @@ export const priceFilterReducer = (state = initialState, action: any) => {
 
 //===================================================
 
-import { AddressActionTypes, Address, AccountActionTypes, CHECKOUT } from "./action";
+import { AddressActionTypes, Address, AccountActionTypes} from "./action";
 
 export interface AddressState {
   address: Address | null;
@@ -153,9 +153,48 @@ export const accountReducer = (
 
 //========================================================
 
+// import { SET_SHIPPING_OPTION , optionType} from "./action";
+
+// const shippingInitialState :optionType= {
+//   shippingOption: 'Free',
+// };
+
+// export const ShippingReducer = (state = shippingInitialState, action : any):optionType => {
+//   switch (action.type) {
+//     case SET_SHIPPING_OPTION:
+//       return {
+//         ...state,
+//         shippingOption: action.payload,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
 
+export interface shippingState {
+  shippingMethod: string;
 
+}
+
+const shippingInitialState: shippingState = {
+  shippingMethod: "Free",
+};
+
+export const shippingReducer = (
+  state = shippingInitialState,
+  action: { type: string; payload: any }
+): shippingState => {
+  switch (action.type) {
+    case "SET_SHIPPING_METHOD":
+      return {
+        ...state,
+        shippingMethod: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 
 

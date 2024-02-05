@@ -7,19 +7,49 @@ import { useState } from "react";
 import { updateAddress, updateBillingAddress } from "../Redux/action";
 
 interface RootState {
-  address: AddressState;
+  // address: {
+  //   streetAddress: string;
+  //   country: string;
+  //   city: string;
+  //   state: string;
+  //   zipCode: string;
+  //   firstName:string;
+  //   lastName:string;
+  //   phoneNumber:number;
+  // };
+  address: AddressState
   billingAddress: BillingState;
 }
+interface  AddressStateType {
+  streetAddress: string;
+  country: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  firstName:string;
+  lastName:string;
+  phoneNumber:number;
+}
+interface BillingStateType {
+  streetAddress: string;
+  country: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  firstName:string;
+  lastName:string;
+  phoneNumber:number;
+}
 const Address = () => {
-  const { address } = useSelector((state: RootState) => state.address);
+  const { address } = useSelector((state: RootState) => state.address);  
   const { billingAddress } = useSelector(
     (state: RootState) => state.billingAddress
   );
 
   const dispatch = useDispatch();
-  const [editedAddress, setEditedAddress] = useState<AddressState>(address);
+  const [editedAddress, setEditedAddress] = useState<AddressStateType>(address);
   const [editedBillingAddress, setEditedBillingAddress] =
-    useState<BillingState>(billingAddress);
+    useState<BillingStateType>(billingAddress);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isBillingAddressEditing, setIsBillingAddressEditing] = useState(false);

@@ -12,7 +12,7 @@ const BlogMain = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Blog");
   const BucketId = "projectImages";
   const [currentImage, setCurrentImage] = useState("FirstGrid");
-  const handleImageChange = (image) => {
+  const handleImageChange = (image : string) => {
     setCurrentImage(image);
   };
 

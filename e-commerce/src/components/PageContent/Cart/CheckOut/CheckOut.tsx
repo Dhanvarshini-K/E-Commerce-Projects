@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { setAddress, setPaymentMethod } from "../../Redux/action";
 import { ShopContext } from "../../../CommonFunctionality/Context/ShopContext";
 import OrderSummary from "../OrderSummary/OrderSummary";
@@ -9,11 +9,31 @@ import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import "./CheckOut.scss";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { shippingState } from "../../Redux/reducer";
+
+interface RootState{
+  shipping : shippingState
+}
+interface FormData {
+  firstName: string,
+  lastName: string,
+  phoneNumber:string,
+  email: string,
+  streetAddress: string,
+  city: String,
+  state: string,
+  country: string,
+  zipCode: string,
+  cardNumber: string,
+  date:string,
+  cvv: string,
+}
 
 const CheckOut = () => {
-  const dispatch = useDispatch();
+
+  const dispatch = useDispatch();  
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     phoneNumber: "",
@@ -45,30 +65,29 @@ const CheckOut = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
     dispatch(setAddress(formData));
     dispatch(setPaymentMethod(formData.paymentMethod));
     clearForm(e);
     showToast("Order placed successfully!");
-    showToast('Please fill the required fields')
+    showToast("Please fill the required fields");
     setTimeout(() => {
       navigate("/cart/ordercomplete");
     }, 5000);
   };
 
-
   const bucketId = "projectImages";
-  const { getTotalCartAmount, cartItems, shopProduct, applyCoupon } =
+  const { getTotalCartAmount, cartItems, shopProduct, applyCoupon, appliedCouponDiscount,couponCode } =
     useContext(ShopContext);
   const [getCoupon, setGetCoupon] = useState("");
   const [toastMessage, setToastMessage] = useState("");
-
   const handleApplyCoupon = () => {
     applyCoupon(getCoupon);
   };
 
-  const clearForm = (e) => {
+  
+
+  const clearForm = (e : any) => {
     setFormData({
       ...formData,
       firstName: "",
@@ -86,13 +105,14 @@ const CheckOut = () => {
     });
   };
 
-  const showToast = (message) => {
+  const showToast = (message : string) => {
     setToastMessage(message);
     toast.success(message);
-    toast.error(message);
   };
 
-
+  const {shippingMethod} = useSelector((state :RootState) => state.shipping)
+  console.log(shippingMethod);
+  
   return (
     <>
       <div className="row d-flex gap-md-4 mx-3">
@@ -302,7 +322,6 @@ const CheckOut = () => {
                   <div className="d-flex gap-2">
                     <input
                       type="radio"
-                      name="card"
                       name="paymentMethod"
                       value="paypal"
                       onChange={handleChange}
@@ -386,10 +405,12 @@ const CheckOut = () => {
                 src={`${storage.getFilePreview(bucketId, "TicketPercent")}`}
                 alt=""
               />
-              <span className="h5 fs-5">JenkateMW</span>
+              <span className="h5 fs-5">
+                {`${couponCode}`}
+              </span>
             </div>
             <div>
-              <span className="text-success fw-bold">-$25.00</span>
+              <span className="text-success fw-bold">{`-$ ${appliedCouponDiscount}.00`}</span>
               <button className="text-success fw-bold border-0 bg-transparent">
                 [Remove]
               </button>
@@ -397,18 +418,18 @@ const CheckOut = () => {
           </div>
           <div className="d-flex justify-content-between border-bottom p-2">
             <span>Shipping</span>
-            <span className="fw-bold">Free</span>
+            <span className="fw-bold">{shippingMethod}</span>
           </div>
           <div className="d-flex justify-content-between border-bottom p-2">
             <span>Subtotal</span>
             <span className="fw-bold">
-              $ {`${getTotalCartAmount(cartItems, shopProduct, 0)}`}
+              $ {`${Math.abs(getTotalCartAmount(cartItems, shopProduct, 0))}`}
             </span>
           </div>
           <div className="d-flex justify-content-between p-2">
             <span>Total</span>
             <span className="fw-bold">
-              $ {`${getTotalCartAmount(cartItems, shopProduct, 0)}`}
+            $ {`${Math.abs(getTotalCartAmount(cartItems, shopProduct, 0))}`}
             </span>
           </div>
         </div>
