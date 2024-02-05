@@ -9,12 +9,6 @@ import "../Home/Home.scss";
 const HomePage = () => {
   return (
     <>
-    {/* <HomePageMain/> */}
-      {/* <div className="product container "><HomeProduct /></div> */}
-      {/* <CardItem/> */}
-      {/* <HomeSaleUp/> */}
-      {/* <HomeArticle/> */}
-
       <HomePageMain/>
       <div className="product container">
       <HomeProductItem/>

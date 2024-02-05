@@ -154,27 +154,7 @@ export const accountReducer = (
 //========================================================
 
 
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface EmailStateType {
-  email?: string;
-}
-
-const initialEmailData: EmailStateType = {
-  email: "",
-};
-
-const emailSlice = createSlice({
-  name: "EmailData",
-  initialState: initialEmailData,
-  reducers: {
-    updateEmailData: (state, action: PayloadAction<{ email: string }>) => {
-      return { ...state, ...action.payload };
-    },
-  },
-});
-
-export default emailSlice.reducer;
 
 
 

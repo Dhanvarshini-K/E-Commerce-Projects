@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./ShoppingCart.scss";
-import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
+import { ShopContext } from "../../../CommonFunctionality/Context/ShopContext";
 import ShoppingProduct from "../ShoppingCartDetails/ShoppingProduct";
-import { storage } from "../../../appwriteConfig";
+import { storage } from "../../../../appwriteConfig";
 import ShoppingProductDevice from "../ShoppingCartDetails/ShoppingProductDevice";
 import { Link } from "react-router-dom";
 

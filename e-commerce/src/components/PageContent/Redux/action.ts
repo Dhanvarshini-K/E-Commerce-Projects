@@ -114,9 +114,7 @@ export type AccountActionTypes = ReturnType<typeof setAccountData>;
 
 //=============================================================
 
-import { createAction } from "@reduxjs/toolkit";
 
-export const updateEmailData = createAction<{ email: string }>("updateEmailData");
 
 
 //=====================================================================

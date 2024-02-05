@@ -68,7 +68,6 @@ const Contact = () => {
         emailRef.current.value = "";
         messageRef.current.value = "";
       } else {
-        // If any input field is empty, display an error message
         toast.error("Please fill in all fields before sending the message");
       }
     } catch (error) {

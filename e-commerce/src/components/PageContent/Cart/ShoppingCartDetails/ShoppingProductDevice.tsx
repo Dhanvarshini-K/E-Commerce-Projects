@@ -1,6 +1,6 @@
 import React, { useContext, useReducer } from "react";
 import "./ShoppingProduct.scss"
-import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
+import { ShopContext } from "../../../CommonFunctionality/Context/ShopContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 

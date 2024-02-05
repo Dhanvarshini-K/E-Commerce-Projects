@@ -1,4 +1,3 @@
-// import { chevron_right_icon } from "../../../assets/resources/icons";
 
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

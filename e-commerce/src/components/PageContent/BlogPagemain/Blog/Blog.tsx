@@ -10,7 +10,11 @@ const BlogMain = () => {
   const [showMore, setShowMore] = useState<Boolean>(false);
   const [isActive, setIsActive] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All Blog");
-  const BucketId = 'projectImages';
+  const BucketId = "projectImages";
+  const [currentImage, setCurrentImage] = useState("FirstGrid");
+  const handleImageChange = (image) => {
+    setCurrentImage(image);
+  };
 
   const viewReducer = (state: any, action: any) => {
     switch (action.type) {
@@ -27,12 +31,6 @@ const BlogMain = () => {
     }
   };
   const [gridView, dispatch] = useReducer(viewReducer, "row-cols-md-3");
-
-
-
-
-
-
   return (
     <>
       <div className="blog_image">
@@ -41,7 +39,7 @@ const BlogMain = () => {
             <Link to="/home" className="text-decoration-none text-dark h5 ">
               Home
             </Link>
-            <FontAwesomeIcon icon={faChevronRight}/>
+            <FontAwesomeIcon icon={faChevronRight} />
             <Link
               to="/blog"
               className="text-decoration-none text-dark h5 fw-bold"
@@ -72,37 +70,72 @@ const BlogMain = () => {
         <div className="sort_container d-md-flex d-none d-md-block align-items-start">
           <div className="d-flex gap-2 align-items-baseline">
             <p className="text-center fs-5">Sort by</p>
-            <FontAwesomeIcon icon={faAngleDown}/>
-
+            <FontAwesomeIcon icon={faAngleDown} />
           </div>
 
           <div className="d-flex ps-3">
             <button
-              onClick={() => dispatch({ type: "THREE" })}
+              onClick={() => {
+                dispatch({ type: "THREE" });
+                handleImageChange("FirstGrid");
+              }}
               className="border-1"
             >
-              <img src={`${storage.getFilePreview(BucketId,'FirstGrid')}`} alt="first_page_icon" />
+              <img
+                src={`${storage.getFilePreview(
+                  BucketId,
+                  currentImage === "FirstGrid" ? "FirstGrid" : "FirstLightGrid"
+                )}`}
+                alt="first_page_icon"
+              />
             </button>
             <button
-              onClick={() => dispatch({ type: "FOUR" })}
+              onClick={() => {
+                dispatch({ type: "FOUR" });
+                handleImageChange("SecondGrid");
+              }}
               className="border-1"
             >
-              <img src={`${storage.getFilePreview(BucketId,'SecondGrid')}`} alt="first_page_icon" />
+              <img
+                src={`${storage.getFilePreview(
+                  BucketId,
+                  currentImage === "SecondGrid"
+                    ? "SecondDarkGrid"
+                    : "SecondGrid"
+                )}`}
+                alt="second_page_icon"
+              />
             </button>
             <button
-              onClick={() => dispatch({ type: "TWO" })}
+              onClick={() => {
+                dispatch({ type: "TWO" });
+                handleImageChange("ThirdGrid");
+              }}
               className="border-1"
             >
-              <img src={`${storage.getFilePreview(BucketId,'ThirdGrid')}`} alt="first_page_icon" />
+              <img
+                src={`${storage.getFilePreview(
+                  BucketId,
+                  currentImage === "ThirdGrid" ? "ThirdDark" : "ThirdGrid"
+                )}`}
+                alt="third_page_icon"
+              />
             </button>
             <button
-              onClick={() => dispatch({ type: "ONE" })}
+              onClick={() => {
+                dispatch({ type: "ONE" });
+                handleImageChange("FourthGrid");
+              }}
               className="border-1"
             >
-              <img src={`${storage.getFilePreview(BucketId,'FourthGrid')}`} alt="first_page_icon" />
+                <img
+                src={`${storage.getFilePreview(
+                  BucketId,
+                  currentImage === "FourthGrid" ? "FourthDark" : "FourthGrid"
+                )}`}
+                alt="fourth_page_icon"
+              />
             </button>
-
-
           </div>
         </div>
         <div className="dropdown d-flex gap-2 flex-column d-md-none d-sm-block">
@@ -111,7 +144,7 @@ const BlogMain = () => {
             onClick={() => setIsActive(!isActive)}
           >
             <span className="h5">{selectedCategory}</span>
-            <FontAwesomeIcon icon={faAngleDown}/>
+            <FontAwesomeIcon icon={faAngleDown} />
           </div>
           {isActive && (
             <div className="dropdown-content border border-dark  d-flex flex-column gap-2 rounded p-2">
@@ -132,7 +165,7 @@ const BlogMain = () => {
         </div>
       </section>
 
-      <BlogArticle view={gridView} addArticle={showMore}/>
+      <BlogArticle view={gridView} addArticle={showMore} />
 
       <div className="p-4 d-flex justify-content-center">
         {showMore ? (

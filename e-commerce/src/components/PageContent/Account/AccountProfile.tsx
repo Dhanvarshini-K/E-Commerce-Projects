@@ -1,14 +1,12 @@
-// import { sofia_image } from "../../../assets/resources/images";
-// import { down_arrow, profile_change, user_icon } from "../../../assets/resources/icons";
+
 import "./AccountProfile.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../utils/AuthContext";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { storage } from "../../../appwriteConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { updateDisplayName } from "../Redux/action";
+import { useSelector } from "react-redux";
 import { AccountState } from "../Redux/reducer";
 
 interface accountProps {

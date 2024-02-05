@@ -10,7 +10,6 @@ const ProductPage = () => {
   const { shopProduct }: any = useContext(ShopContext) || {};
   const { productId } = useParams();
   const product = shopProduct.documents?.find((e : any) => e.id === Number(productId));
-  // const product = Array.isArray(shopProduct) ? shopProduct.find((e: any) => e.id === Number(productId)) : null;
   return (
     <>
       <BreadCrums product={product} />

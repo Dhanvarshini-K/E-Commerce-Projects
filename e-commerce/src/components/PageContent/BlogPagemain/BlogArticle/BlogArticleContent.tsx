@@ -1,4 +1,3 @@
-// import { article_user, calendar } from "../../../assets/resources/icons";
 import { useLocation } from "react-router-dom";
 import HomeArticle from "../../HomePageMain/HomeArticle/HomeArticle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

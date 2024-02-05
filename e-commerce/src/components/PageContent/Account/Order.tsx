@@ -1,6 +1,5 @@
 
 import { useSelector } from "react-redux";
-import { orderData } from "../../Functionality_Data/OrderData";
 import { useContext } from "react";
 import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
 interface OrderState {
@@ -60,41 +59,3 @@ export default OrderHistory;
 
 
 
-//        {orderData.map((order) => {
-//   return (
-//     <>
-      // <tr className="d-flex justify-content-between">
-      //   <td className="d-none d-md-block">
-      //     <span className="h6">{orderId}</span>
-      //   </td>
-      //   <td className="d-none d-md-block">
-      //     <span className="h6">{currentDate}</span>
-      //   </td>
-      //   <td className="d-none d-md-block">
-      //     <span className="h6">{order.status}</span>
-      //   </td>
-      //   <td className="d-none d-md-block">
-      //     <span className="h6">${`${getTotalCartAmount(cartItems,shopProduct,0)}`}</span>
-      //   </td>
-      // </tr>
-//       <div className="d-sm-block d-md-none border-bottom px-4">
-//       <div className="d-flex justify-content-between">
-//         <span className="h6 text-seconday fw-bold">Number ID</span>
-//         <span className="h6">{order.number_id}</span>
-//       </div>
-//       <div className="d-flex justify-content-between">
-//         <span className="h6 text-seconday fw-bold">Dates</span>
-//         <span className="h6">{order.dates}</span>
-//       </div>
-//       <div className="d-flex justify-content-between">
-//         <span className="h6 text-seconday fw-bold">Status</span>
-//         <span className="h6">{order.dates}</span>
-//       </div>
-//       <div className="d-flex justify-content-between">
-//         <span className="h6 text-seconday fw-bold">Price</span>
-//         <span className="h6">{order.dates}</span>
-//       </div>
-//     </div>
-//     </>
-//   );
-// })}

@@ -1,5 +1,4 @@
-// import { hide_password,open_password } from "../../../assets/resources/icons";
-// import { Sign_img } from "../../../assets/resources/images";
+
 import { Link } from "react-router-dom";
 import "../Form/Form.scss";
 import { useRef, useState } from "react";

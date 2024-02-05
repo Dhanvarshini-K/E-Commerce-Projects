@@ -32,27 +32,24 @@ const Address = () => {
     setIsEditing(false);
   };
 
-  // Function to handle saving changes
   const handleSave = () => {
-    dispatch(updateAddress(editedAddress)); // Dispatch action to update the address in Redux state
+    dispatch(updateAddress(editedAddress));
     setIsEditing(false);
   };
   const handleSaveValue = () => {
-    dispatch(updateBillingAddress(editedBillingAddress)); // Dispatch action to update the address in Redux state
+    dispatch(updateBillingAddress(editedBillingAddress));
     setIsBillingAddressEditing(false);
   };
 
-  // Function to handle canceling editing
   const handleCancel = () => {
-    setEditedAddress(address); // Reset edited address to the current address
+    setEditedAddress(address); 
     setIsEditing(false);
   };
   const handleCancelValue = () => {
-    setEditedBillingAddress(billingAddress); // Reset edited address to the current address
+    setEditedBillingAddress(billingAddress); 
     setIsBillingAddressEditing(false);
   };
 
-  // Function to handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEditedAddress((prevAddress) => ({

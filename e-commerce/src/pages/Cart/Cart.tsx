@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import "../../pages/Cart/Cart.scss";
-import CheckOut from "../../components/PageContent/Cart/CheckOut";
-import OrderComplete from "../../components/PageContent/Cart/OrderComplete";
-import ShoppingCart from "../../components/PageContent/Cart/ShoppingCart";
-import CartHeader from "../../components/PageContent/Cart/CartHeader";
+import CheckOut from "../../components/PageContent/Cart/CheckOut/CheckOut";
+import OrderComplete from "../../components/PageContent/Cart/Complete/OrderComplete";
+import ShoppingCart from "../../components/PageContent/Cart/ShoppingCart/ShoppingCart";
+import CartHeader from "../../components/PageContent/Cart/CartHeader/CartHeader";
 const CartPage = () => {
   const { currentpage } = useParams();
 

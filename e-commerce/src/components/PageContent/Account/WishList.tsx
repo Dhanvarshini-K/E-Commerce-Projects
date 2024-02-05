@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import { remove } from "../../../assets/resources/icons";
 import "./WishList.scss";
 import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

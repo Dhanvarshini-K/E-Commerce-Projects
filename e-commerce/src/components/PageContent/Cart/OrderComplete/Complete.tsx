@@ -1,9 +1,9 @@
 
 import React, { useContext, useReducer } from "react";
 import "./Complete.scss";
-import { ShopContext } from "../../CommonFunctionality/Context/ShopContext";
+import { ShopContext } from "../../../CommonFunctionality/Context/ShopContext";
 import { useDispatch, useSelector } from "react-redux";
-import { setDate, setOrderId } from "../Redux/action";
+import { setDate, setOrderId } from "../../Redux/action";
 interface OrderState {
   orderId: string;
   paymentMethod: string;

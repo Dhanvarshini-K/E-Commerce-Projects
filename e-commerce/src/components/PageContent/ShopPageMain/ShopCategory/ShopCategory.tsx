@@ -2,9 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./ShopCategory.scss";
 import { Link, useLocation } from "react-router-dom";
-import {
-  setPriceFilter,
-} from "../../Redux/action";
+import { setPriceFilter } from "../../Redux/action";
 import { databases, storage } from "../../../../appwriteConfig";
 import Item from "../../../CommonFunctionality/ProductItems/ProductItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,13 +21,10 @@ const ShopCategory = (props: { category: string }) => {
   const { minPrice, maxPrice } = useSelector(
     (state: RootState) => state.PriceFilter
   );
-  console.log(minPrice);
-  console.log(maxPrice);
 
   const handleCheckboxChange = (min: number, max: number) => {
     shopDispatch(setPriceFilter(min, max));
   };
-
 
   const shopReducer = (state: any, action: any) => {
     switch (action.type) {
@@ -68,6 +63,10 @@ const ShopCategory = (props: { category: string }) => {
     false
   );
   const [shopProduct, setShopProduct] = useState<any>({ documents: [] });
+  const [currentImage, setCurrentImage] = useState("FirstGrid");
+  const handleImageChange = (image) => {
+    setCurrentImage(image);
+  };
 
   useEffect(() => {
     const fetchShopProduct = async () => {
@@ -512,44 +511,56 @@ const ShopCategory = (props: { category: string }) => {
                         dispatch({ type: "THREE" });
                         setEditFilter(true);
                         dispatchGridHeading({ type: "Hide" });
+                        handleImageChange("FirstGrid");
                       }}
                       className="border-1 d-none d-md-block"
                     >
                       <img
-                        src={`${storage.getFilePreview(BucketId, "FirstGrid")}`}
+                        src={`${storage.getFilePreview(
+                          BucketId,
+                          currentImage === "FirstGrid"
+                            ? "FirstGrid"
+                            : "FirstLightGrid"
+                        )}`}
                         alt="first_page_icon"
                       />
-
-             
                     </button>
                     <button
                       onClick={() => {
                         dispatch({ type: "FOUR" });
                         setEditFilter(false);
                         dispatchGridHeading({ type: "Show" });
+                        handleImageChange("SecondGrid");
                       }}
                       className="border-1 d-none d-md-block "
                     >
                       <img
                         src={`${storage.getFilePreview(
                           BucketId,
-                          "SecondGrid"
+                          currentImage === "SecondGrid"
+                            ? "SecondDarkGrid"
+                            : "SecondGrid"
                         )}`}
-                        alt="first_page_icon"
+                        alt="second_page_icon"
                       />
-
                     </button>
                     <button
                       onClick={() => {
                         dispatch({ type: "TWO" });
                         setEditFilter(true);
                         dispatchGridHeading({ type: "Show" });
+                        handleImageChange("ThirdGrid");
                       }}
                       className="border-1"
                     >
                       <img
-                        src={`${storage.getFilePreview(BucketId, "ThirdGrid")}`}
-                        alt="first_page_icon"
+                        src={`${storage.getFilePreview(
+                          BucketId,
+                          currentImage === "ThirdGrid"
+                            ? "ThirdDark"
+                            : "ThirdGrid"
+                        )}`}
+                        alt="third_page_icon"
                       />
                     </button>
                     <button
@@ -557,15 +568,18 @@ const ShopCategory = (props: { category: string }) => {
                         dispatch({ type: "ONE" });
                         setEditFilter(true);
                         dispatchGridHeading({ type: "Show" });
+                        handleImageChange("FourthGrid");
                       }}
                       className="border-1"
                     >
                       <img
                         src={`${storage.getFilePreview(
                           BucketId,
-                          "FourthGrid"
+                          currentImage === "FourthGrid"
+                            ? "FourthDark"
+                            : "FourthGrid"
                         )}`}
-                        alt="first_page_icon"
+                        alt="fourth_page_icon"
                       />
                     </button>
                   </div>
@@ -587,8 +601,6 @@ const ShopCategory = (props: { category: string }) => {
           {showMore ? "Show Less" : "Show More"}
         </button>
       </div>
-
-      
     </React.Fragment>
   );
 };
